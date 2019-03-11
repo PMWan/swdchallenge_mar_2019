@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Donations between 1973 and 2013</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.0.0/build/vega.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc14/build/vega-lite.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@3.29.1/build/vega-embed.js"></script>
+
+    <style>
+      .vega-embed {
+        padding-top: 1em;
+        padding-bottom: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Donations between 1973 and 2013</h1>
+
+    <p>The charts below visualize donations amongst <strong>45 countries</strong> between 1973 and 2013.</p>
+      
+    <p><strong>Hint:</strong> Mouse over charts for details.</p>
+
+    <!-- chart container -->
+    <div id="vis"></div>
+
+    <!-- vega-lite spec -->
+    <script>
+      var viewSpec = {
+        title: "How much was donated?",
+        data: {
+          url: "data/aiddata-countries-only.csv"
+        },
+        mark: "bar",
+        encoding: {
+          x: {
+            field: "year",
+            type: "ordinal",
+            title: "Year"
+          },
+          y: {
+            aggregate: "sum",
+            field: "commitment_amount_usd_constant",
+            title: "Donations (USD, constant)",
+            type: "quantitative",
+            "format": ","
+          }
+        }
+      };
+
+      vegaEmbed('#vis', viewSpec);
+    </script>
+
+    <!-- chart container -->
+    <div id="vis2"></div>
+
+    <!-- vega-lite spec -->
+    <script>
+      var viewSpec = {
+        title: "Who donated?",
+        data: {
+          url: "data/aiddata-countries-only.csv"
+        },
+        mark: "bar",
+        encoding: {
+          x: {
+            field: "year",
+            type: "ordinal",
+            title: "Year"
+          },
+          y: {
+            aggregate: "sum",
+            field: "commitment_amount_usd_constant",
+            title: "Donations (USD, constant)",
+            type: "quantitative",
+            "format": ","
+          },
+          color: {
+            "field": "donor",
+            title: "Donor",
+            "type": "nominal", 
+            "legend": null
+          }
+        }
+      };
+
+      vegaEmbed('#vis2', viewSpec);
+    </script>
+
+    <!-- chart container -->
+    <div id="vis3"></div>
+
+    <!-- vega-lite spec -->
+    <script>
+      var viewSpec = {
+        title: "Who received it?",
+        data: {
+          url: "data/aiddata-countries-only.csv"
+        },
+        mark: "bar",
+        encoding: {
+          x: {
+            field: "year",
+            type: "ordinal",
+            title: "Year"
+          },
+          y: {
+            aggregate: "sum",
+            field: "commitment_amount_usd_constant",
+            title: "Donations (USD, constant)",
+            type: "quantitative",
+            "format": ","
+          },
+          color: {
+            "field": "recipient", 
+            title: "Recipient",
+            "type": "nominal", 
+            "legend": null
+          }
+        }
+      };
+
+      vegaEmbed('#vis3', viewSpec)
+    </script>
+
+    <div id="vis4"></div>
+
+    <script>
+      var viewSpec = {
+        title: "...and for what purpose?",
+        data: {
+          url: "data/aiddata-countries-only.csv"
+        },
+        mark: "bar",
+        encoding: {
+          x: {
+            field: "year",
+            type: "ordinal",
+            title: "Year"
+          },
+          y: {
+            aggregate: "sum",
+            field: "commitment_amount_usd_constant",
+            title: "Donations (USD, constant)",
+            type: "quantitative",
+            "format": ","
+          },
+          color: {
+            "field": "coalesced_purpose_name", 
+            "title": "Purpose", 
+            "type": "nominal",
+            "legend": null
+          }
+        }
+      };
+
+      vegaEmbed('#vis4', viewSpec);
+    </script>
+
+  </body>
+</html>
